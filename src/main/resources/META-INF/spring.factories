@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.nondo.maven.conf.CacheConfirguration
+com.nondo.maven.conf.EncodingConvertorConfiguration

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nondo.springboot.user.map.DepartmentMapper">
+    <insert id="addDepartment" parameterType="com.nondo.springboot.user.bean.Department" >
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            select CEIL(RAND()*1000)
+        </selectKey>
+        INSERT  INTO  department(name,descr) VALUES(#{name},#{descr});
+    </insert>
+    <update id="updateDepartment" parameterType="com.nondo.springboot.user.bean.Department">
+        UPDATE department set(name=#{name},desct=#{descr}) where id=#{id};
+    </update>
+    <delete id="deleteDepartmentById" parameterType="java.lang.Integer">
+        delete from department where id=#{id};
+    </delete>
+    <select id="queryDepartmentById" parameterType="java.lang.Integer" resultType="com.nondo.springboot.user.bean.Department">
+        select id,name,descr from department where id=#{id};
+    </select>
+    <select id="getDepartmentsByCondition" parameterType="com.nondo.springboot.user.bean.Department" resultType="com.nondo.springboot.user.bean.Department">
+        select * from department
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+            <if test="name!=null">
+                and name like CONCAT('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+</mapper>
