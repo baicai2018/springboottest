@@ -12,15 +12,13 @@ import java.util.Arrays;
 
 @Configuration
 public class DruidConfiguration {
-
     @ConfigurationProperties(prefix = "spring.datasource.druid")
     @Bean(initMethod = "init",destroyMethod = "close")
     public DruidDataSource dataSource() {
-        DruidDataSource druidDataSource = new DruidDataSource();
-        druidDataSource.setProxyFilters(Arrays.asList(statFilter()));
-        return druidDataSource;
+        DruidDataSource ds = new DruidDataSource();
+        ds.setProxyFilters(Arrays.asList(statFilter()));
+        return ds;
     }
-
     @Bean
     public Filter statFilter() {
         StatFilter filter = new StatFilter();

@@ -6,9 +6,11 @@ import com.nondo.maven.listener.ListenerTest;
 import com.nondo.maven.servlet.ServletTest;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Import;
 
@@ -17,7 +19,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import java.util.EnumSet;
 
-@SpringBootApplication
+@EnableCaching
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @Import(EncodingConvertorConfiguration.class)
 public class SpringbootApplication extends SpringBootServletInitializer implements ServletContextInitializer{
     @Override
